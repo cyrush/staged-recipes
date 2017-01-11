@@ -1,0 +1,45 @@
+#
+{% set version = "0.2.1" %}
+{% set sha256 = "13c1b3d8af93c000f10eed9dc37d339dcf6dd7cd614d7c835ec6ffc1c0507a13" %}
+
+package:
+  name: conduit
+  version: {{ version }}
+
+source:
+  fn: conduit-{{ version }}.tar.gz
+  url: https://github.com/LLNL/conduit/archive/v{{ version }}.tar.gz
+  sha256: {{ sha256 }}
+
+build:
+  number: 0
+  #skip: true  # [win]
+
+requirements:
+  build:
+    - cmake 3.0.1*
+    - python
+    - numpy
+    - hdf5 1.8.17*
+
+test:
+  commands:
+    - test -e "${PREFIX}/lib/libconduit.so"
+
+about:
+  home: https://github.com/llnl/conduit
+  license: BSD 3-Clause
+  summary: 'Simplified Data Exchange for HPC Simulations'
+
+  # The remaining entries in this section are optional, but recommended
+  description: |
+   Conduit - Simplified Data Exchange for HPC Simulations.
+   Conduit is an open source project from Lawrence Livermore National Laboratory
+   that provides an intuitive model for describing hierarchical scientific data 
+   in C++, C, Fortran, and Python. It is used for data coupling between packages
+   in-core, serialization, and I/O tasks.
+  doc_url: https://software.llnl.gov/conduit
+  dev_url: https://github.com/llnl/conduit
+extra:
+  recipe-maintainers:
+    - cyrush
