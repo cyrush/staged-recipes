@@ -17,14 +17,18 @@ build:
 
 requirements:
   build:
-    - cmake
+    - cmake 3.3*
     - python
     - numpy
     - hdf5 1.8.17*
-
+  run:
+    - python
+    - numpy
+    - hdf5 1.8.17*
 test:
   commands:
-    - test -e "${PREFIX}/lib/libconduit.so"
+    - test -f $PREFIX/lib/libconduit.dylib  # [osx]
+    - test -f $PREFIX/lib/libconduit.so     # [linux]
 
 about:
   home: https://github.com/llnl/conduit
@@ -33,7 +37,6 @@ about:
 
   # The remaining entries in this section are optional, but recommended
   description: |
-   Conduit - Simplified Data Exchange for HPC Simulations.
    Conduit is an open source project from Lawrence Livermore National Laboratory
    that provides an intuitive model for describing hierarchical scientific data 
    in C++, C, Fortran, and Python. It is used for data coupling between packages
